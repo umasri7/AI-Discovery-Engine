@@ -1,13 +1,13 @@
 from sentence_transformers import SentenceTransformer
 
-print("Loading AI Model...")
+model = None
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
-
-print("Model Loaded Successfully!")
+def get_model():
+    global model
+    if model is None:
+        print("Loading model...")
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+    return model
 
 def create_embedding(text):
-    """
-    Convert text into an embedding vector.
-    """
-    return model.encode(text)
+    return get_model().encode(text)
